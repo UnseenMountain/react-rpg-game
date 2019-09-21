@@ -31,17 +31,14 @@ interface Props {
   playerPosition: Position;
 }
 
-const Map: React.FC<Props> = ({ moveDirection, playerPosition }) => {
+const Map: React.FC<Props> = ({ playerPosition }) => {
   const createMapContent = () => {
     const mapContent: CellContent[][] = [];
     for (let i = 0; i < GRID_WIDTH; i += 1) {
       mapContent[i] = [];
       for (let j = 0; j < GRID_HEIGHT; j += 1) {
-        if (i === playerPosition[0] && j === playerPosition[1]) {
-          mapContent[i][j] = 'Player';
-        } else {
-          mapContent[i][j] = 0;
-        }
+        // This will be filled out later with some tiles
+        mapContent[i][j] = 0;
       }
     }
     return mapContent;
@@ -51,13 +48,13 @@ const Map: React.FC<Props> = ({ moveDirection, playerPosition }) => {
     return createMapContent().map((row, posX) => {
       return row.map((column, posY) => {
         const position = `${posX}-${posY}`;
-        return <Cell key={position} content={column} moveDirection={moveDirection} />;
+        return <Cell key={position} content={column} />;
       });
     });
   };
 
-  const mapLeftPosition = (-playerPosition[1] + 5) * CELL_WIDTH_IN_PIXELS;
-  const mapUpPosition = (-playerPosition[0] + 5) * CELL_WIDTH_IN_PIXELS;
+  const mapLeftPosition = (-playerPosition[1] + 5) * CELL_WIDTH_IN_PIXELS - 1;
+  const mapUpPosition = (-playerPosition[0] + 5) * CELL_WIDTH_IN_PIXELS - 1;
 
   return (
     <Wrapper left={mapLeftPosition} top={mapUpPosition}>

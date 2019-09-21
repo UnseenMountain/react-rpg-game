@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 import { CELL_WIDTH_IN_PIXELS } from '../constants/config';
 import { CellContent } from '../typings/cellContent';
-import { MoveDirection } from '../typings/moveDirection';
-import Player from './Player';
 
 const Wrapper = styled.div`
   border: solid 1px rgba(0, 0, 0, 0.1);
@@ -18,14 +16,10 @@ const Wrapper = styled.div`
 
 interface Props {
   content: CellContent;
-  moveDirection: MoveDirection;
 }
 
-const Cell: React.FC<Props> = ({ content, moveDirection }) => {
+const Cell: React.FC<Props> = () => {
   const renderContent = () => {
-    if (content === 'Player') {
-      return <Player moveDirection={moveDirection} />;
-    }
     return null;
   };
 

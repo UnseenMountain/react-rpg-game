@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { ANIMATION_SPEED, PAUSE_TIME_BETWEEN_MOVES } from '../constants/config';
 import { gameActions } from '../redux/game';
@@ -7,7 +8,15 @@ import { MoveDirection } from '../typings/moveDirection';
 import { Position } from '../typings/position';
 import { ReduxState } from '../typings/reduxState';
 import Map from './Map';
+import Player from './Player';
 import Viewport from './Viewport';
+
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const LEFT_KEYCODE = 37;
 const UP_KEYCODE = 38;
@@ -76,9 +85,12 @@ const Game: React.FC<Props> = ({ moveDirection, movePlayer, playerPosition }) =>
   }, [movePlayer]);
 
   return (
-    <Viewport>
-      <Map playerPosition={playerPosition} moveDirection={moveDirection} />
-    </Viewport>
+    <Wrapper>
+      <Viewport>
+        <Map playerPosition={playerPosition} moveDirection={moveDirection} />
+      </Viewport>
+      <Player moveDirection={moveDirection} />
+    </Wrapper>
   );
 };
 
